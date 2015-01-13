@@ -19,9 +19,10 @@ objToArgs({
 	width: 100,
 	height: 100,
 	style: 'font-color: red',
-	dataFoo: 'bar'
+	dataFoo: 'bar',
+	checked: true
 });
-//=> width="100" height="100" style="font-color: red" data-foo="bar"
+//=> width="100" height="100" style="font-color: red" data-foo="bar" checked
 ```
 
 You can also specify options as a second argument, letting you change the
