@@ -40,7 +40,11 @@ function objToAttrs(object, options) {
 		var quote = options.quote;
 
 		if (typeof value === 'string') {
-			value = value.replace(new RegExp(quote, 'g'), '\\' + quote);
+			value = value.replace(/&/g, '&amp;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;');
 		}
 
 		return argument + options.assignment + quote + value + quote;

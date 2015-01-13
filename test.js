@@ -34,7 +34,7 @@ test('obj-to-attrs', function (t) {
 	t.equal(objToAttrs({ upper: 'test' }), 'upper="test"');
 
 	// Test quote escaping
-	t.equal(objToAttrs({ foo: '"bar"' }), 'foo="\\"bar\\""');
+	t.equal(objToAttrs({ foo: '"bar\'' }), 'foo="&quot;bar&#39;"');
 
 
 	// More random tests
