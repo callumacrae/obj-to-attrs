@@ -1,6 +1,6 @@
 {
   "name": "obj-to-attrs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert a JavaScript object into HTML arguments",
   "main": "index.js",
   "dependencies": {
