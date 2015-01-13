@@ -4,7 +4,7 @@ var test = require('tape');
 var objToAttrs = require('./');
 
 test('obj-to-attrs', function (t) {
-	t.plan(12);
+	t.plan(13);
 
 	// Test basic attributes and boolean attributes
 	t.equal(objToAttrs({ value: 'test' }), 'value="test"');
@@ -32,6 +32,9 @@ test('obj-to-attrs', function (t) {
 	objToAttrs.removeHelper('upper');
 
 	t.equal(objToAttrs({ upper: 'test' }), 'upper="test"');
+
+	// Test quote escaping
+	t.equal(objToAttrs({ foo: '"bar"' }), 'foo="\\"bar\\""');
 
 
 	// More random tests

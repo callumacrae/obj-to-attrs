@@ -38,6 +38,11 @@ function objToAttrs(object, options) {
 
 		// argument="value"
 		var quote = options.quote;
+
+		if (typeof value === 'string') {
+			value = value.replace(new RegExp(quote, 'g'), '\\' + quote);
+		}
+
 		return argument + options.assignment + quote + value + quote;
 	}).join(options.separator);
 }
