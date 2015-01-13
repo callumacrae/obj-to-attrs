@@ -14,5 +14,13 @@
     "test": "node ./test | faucet"
   },
   "author": "Callum Macrae",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/callumacrae/obj-to-attrs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/callumacrae/obj-to-attrs/issues"
+  },
+  "homepage": "https://github.com/callumacrae/obj-to-attrs"
 }
