@@ -1,52 +1,52 @@
 'use strict';
 
 var test = require('tape');
-var objToArgs = require('./');
+var objToAttrs = require('./');
 
-test('obj-to-args', function (t) {
+test('obj-to-attrs', function (t) {
 	t.plan(12);
 
 	// Test basic attributes and boolean attributes
-	t.equal(objToArgs({ value: 'test' }), 'value="test"');
-	t.equal(objToArgs({ value: 'test', foo: 'bar' }), 'value="test" foo="bar"');
-	t.equal(objToArgs({ dataSomething: 'a' }), 'data-something="a"');
-	t.equal(objToArgs({ checked: true }), 'checked');
-	t.equal(objToArgs({ checked: true, value: 'a' }), 'checked value="a"');
+	t.equal(objToAttrs({ value: 'test' }), 'value="test"');
+	t.equal(objToAttrs({ value: 'test', foo: 'bar' }), 'value="test" foo="bar"');
+	t.equal(objToAttrs({ dataSomething: 'a' }), 'data-something="a"');
+	t.equal(objToAttrs({ checked: true }), 'checked');
+	t.equal(objToAttrs({ checked: true, value: 'a' }), 'checked value="a"');
 
 	// Test data helper
-	t.equal(objToArgs({ data: { foo: 'bar' }}), 'data-foo="bar"');
+	t.equal(objToAttrs({ data: { foo: 'bar' }}), 'data-foo="bar"');
 
 	// Test setting options
-	t.equal(objToArgs({ data: { foo: 'bar' }, checked: false }, {
+	t.equal(objToAttrs({ data: { foo: 'bar' }, checked: false }, {
 		assignment: ' => ', quote: "'", separator: ', '
 	}), "data-foo => 'bar', checked");
 
 	// Test adding custom helpers
-	objToArgs.addHelper('upper', function (val) {
+	objToAttrs.addHelper('upper', function (val) {
 		return val.toUpperCase();
 	});
 
-	t.equal(objToArgs({ upper: 'test' }), 'TEST');
+	t.equal(objToAttrs({ upper: 'test' }), 'TEST');
 
 	// Test removing custom helpers
-	objToArgs.removeHelper('upper');
+	objToAttrs.removeHelper('upper');
 
-	t.equal(objToArgs({ upper: 'test' }), 'upper="test"');
+	t.equal(objToAttrs({ upper: 'test' }), 'upper="test"');
 
 
 	// More random tests
-	t.equal(objToArgs({
+	t.equal(objToAttrs({
 		width: 100, height: 100, style: 'font-color: red', dataFoo: 'bar'
 	}), 'width="100" height="100" style="font-color: red" data-foo="bar"');
 
 	var obj = { width: 100, height: 100 };
 	t.equal(
-		objToArgs(obj, { assignment: ' = ', quote: "'", separator: '  ' }),
+		objToAttrs(obj, { assignment: ' = ', quote: "'", separator: '  ' }),
 		"width = '100'  height = '100'"
 	);
 
 	t.equal(
-		objToArgs({ value: 'test', data: { foo: 'bar', hello: 'world' }}),
+		objToAttrs({ value: 'test', data: { foo: 'bar', hello: 'world' }}),
 		'value="test" data-foo="bar" data-hello="world"'
 	);
 });

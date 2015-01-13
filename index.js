@@ -10,9 +10,9 @@ var boolean = 'checked,compact,declare,defer,disabled,ismap,multiple,nohref,' +
  *
  * @param {object} object The object to turn into attributes.
  * @param {object} options Allows you to configure stuff. See README or code.
- * @returns {string} Returns a HTML attribute string!
+ * @returns {string} Returns an HTML attribute string!
  */
-function objToArg(object, options) {
+function objToAttrs(object, options) {
 	options = _.merge({}, {
 		assignment: '=',
 		quote: '"',
@@ -23,7 +23,7 @@ function objToArg(object, options) {
 		// If a helper is available, use that
 		if (typeof helpers[argument] === 'function') {
 			var helped = helpers[argument](value);
-			return (typeof helped === 'object') ? objToArg(helped, options) : helped;
+			return (typeof helped === 'object') ? objToAttrs(helped, options) : helped;
 		}
 
 		// Turn dataTest into data-test
@@ -50,9 +50,9 @@ var helpers = {};
  * @param {string} name Name of the attribute to call the helper on.
  * @param {function} helper The helper function, which should return either an
  * 							object to be turning into a string or a string.
- * @returns {objToArg} Returns itself to allow method chaining.
+ * @returns {objToAttrs} Returns itself to allow method chaining.
  */
-objToArg.addHelper = function (name, helper) {
+objToAttrs.addHelper = function (name, helper) {
 	helpers[name] = helper;
 	return this;
 };
@@ -61,15 +61,15 @@ objToArg.addHelper = function (name, helper) {
  * Removes a helper for a certain attribute.
  *
  * @param {string} name Name of the attribute to remove the helper for.
- * @returns {objToArg} Returns itself to allow method chaining.
+ * @returns {objToAttrs} Returns itself to allow method chaining.
  */
-objToArg.removeHelper = function (name) {
+objToAttrs.removeHelper = function (name) {
 	delete helpers[name];
 	return this;
 };
 
 // A default helper to turn `data: { foo: 'bar' }` into `data-foo="bar"`
-objToArg.addHelper('data', function (argument) {
+objToAttrs.addHelper('data', function (argument) {
 	var newObject = {};
 
 	_.each(argument, function (value, name) {
@@ -79,4 +79,4 @@ objToArg.addHelper('data', function (argument) {
 	return newObject;
 });
 
-module.exports = objToArg;
+module.exports = objToAttrs;

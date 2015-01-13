@@ -1,4 +1,4 @@
-# obj-to-args
+# obj-to-attrs
 
 Turns a JavaScript object into a string containing HTML attributes.
 
@@ -6,16 +6,16 @@ Turns a JavaScript object into a string containing HTML attributes.
 ## Install
 
 ```
-$ npm install --save obj-to-args
+$ npm install --save obj-to-attrs
 ```
 
 
 ## Usage
 
 ```js
-var objToArgs = require('obj-to-args');
+var objToAttrs = require('obj-to-attrs');
 
-objToArgs({
+objToAttrs({
 	width: 100,
 	height: 100,
 	style: 'font-color: red',
@@ -30,7 +30,7 @@ assignment operator, the quotes used, and and separator between attributes.
 
 ```js
 var obj = { width: 100, height: 100 };
-objToArgs(obj, {
+objToAttrs(obj, {
 	assignment: ' = ',
 	quote: "'",
 	separator: '  '
@@ -42,7 +42,7 @@ Finally, it also includes a data attribute helper like in Rails, so you can use
 an object to make lots of data attributes.
 
 ```js
-objToArgs({
+objToAttrs({
 	value: 'test',
 	data: {
 		foo: 'bar',
